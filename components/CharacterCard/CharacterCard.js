@@ -1,6 +1,6 @@
 export function CharacterCard(src, name, occurence, status, type) {
 
-    const occurenceSum = occurence.length
+    
     const card = document.createElement("li");
     card.innerHTML = `
     <li class="card">
@@ -20,10 +20,12 @@ export function CharacterCard(src, name, occurence, status, type) {
               <dt class="card__info-title">Type</dt>
               <dd class="card__info-description">${type}</dd>
               <dt class="card__info-title">Occurrences</dt>
-              <dd class="card__info-description">${occurenceSum}</dd>
+              <dd class="card__info-description">${occurence}</dd>
             </dl>
           </div>
         </li>
     `
+    console.log(occurence);
+    return card;
 
 }

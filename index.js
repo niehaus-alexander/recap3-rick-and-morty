@@ -8,24 +8,24 @@ const navigation = document.querySelector('[data-js="navigation"]');
 const prevButton = document.querySelector('[data-js="button-prev"]');
 const nextButton = document.querySelector('[data-js="button-next"]');
 const pagination = document.querySelector('[data-js="pagination"]');
-
+const currentCards = document.querySelectorAll('[data-js="card"]');
 // States
 
 
 const searchQuery = "";
 const maxPage = 1;
-const page = 1;
-const pageUrl = "https://rickandmortyapi.com/api/character";
+let currentPage = 1;
 
 
+fetchData(1);
 
 
-async function fetchData()  {
-
-const response = await fetch(pageUrl)
+async function fetchData(page)  {
+console.log(page);
+const response = await fetch(`https://rickandmortyapi.com/api/character?page=${page}`)
 const data = await response.json();
 data.results.forEach((person) => {
-  console.log(person.episode.length);
+  // console.log(person.episode.length);
   
   const input = CharacterCard(person.image, person.name, person.episode.length, person.status, person.type);
   
@@ -35,5 +35,47 @@ data.results.forEach((person) => {
 
 
 
-fetchData();
 
+
+
+
+nextButton.addEventListener('click', () => {
+ 
+cardContainer.innerHTML = "";
+currentPage++;
+if(currentPage <= 42) {
+
+console.log(currentPage);
+fetchData(currentPage);
+pagination.textContent = `${currentPage} / 42`
+
+} else {
+  alert("out of range");
+  currentPage--;
+  fetchData(currentPage);
+
+}
+
+});
+
+
+
+
+prevButton.addEventListener('click', () => {
+  cardContainer.innerHTML = "";
+  currentPage--;
+  
+  if(currentPage >= 1) {
+
+    console.log(currentPage);
+    fetchData(currentPage);
+    pagination.textContent = `${currentPage} / 42`
+    
+    } else {
+      alert("out of range");
+      currentPage++;
+      fetchData(currentPage);
+    }
+  
+
+});

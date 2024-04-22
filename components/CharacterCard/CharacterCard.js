@@ -3,7 +3,7 @@ export function CharacterCard(src, name, occurence, status, type) {
     
     const card = document.createElement("li");
     card.innerHTML = `
-    <li class="card">
+    <li class="card" data-js="card">
           <div class="card__image-container">
             <img
               class="card__image"
@@ -25,7 +25,7 @@ export function CharacterCard(src, name, occurence, status, type) {
           </div>
         </li>
     `
-    console.log(occurence);
+    // console.log(occurence);
     return card;
 
 }
